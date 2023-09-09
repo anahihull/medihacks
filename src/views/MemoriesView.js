@@ -1,12 +1,13 @@
+
 import React, { useState } from 'react';
-import { View, Text, Image } from 'react-native';
+import { View, Text } from 'react-native';
 import Timeline from '../components/Timeline';
 import UploadMemory from '../components/UploadMemory';
 
 const MemoriesView = () => {
     const [memories, setMemories] = useState([
-        { id: 1, content: 'Memory 1', start: '2023-09-01', image: null },
-        { id: 2, content: 'Memory 2', start: '2023-09-05', image: null },
+        { id: 1, content: 'Memory 1', start: '2023-09-01', image: 'https://img.freepik.com/free-photo/young-family-with-their-sons-home-having-fun_1303-20999.jpg?w=1380&t=st=1694294471~exp=1694295071~hmac=ebc373e66eff7bceb7daaf5f4956d3a6a6bbd80ac24c0d5251de17cc84624f5b' },
+        { id: 2, content: 'Memory 2', start: '2023-09-05', image: 'https://img.freepik.com/free-photo/happy-family-with-dog-moving-new-home_23-2149749175.jpg?w=1060&t=st=1694294533~exp=1694295133~hmac=256897d000ea1535d688ed3d05ba2af80d902aa29f1bb33e3743577da7a25939' },
     ]);
 
     const handleNewMemory = (newMemory) => {
@@ -23,12 +24,9 @@ const MemoriesView = () => {
 
     return (
         <View style={{ padding: 20 }}>
-            <Text>Memories View</Text>
-            <UploadMemory memories={memories} onNewMemory={handleNewMemory} />
+            <Text>Slideshow View</Text>
             <Timeline memories={memories} />
-            {memories.map(memory => (
-                memory.image ? <Image key={memory.id} source={{ uri: memory.image }} style={{ width: 100, height: 100 }} /> : null
-            ))}
+            <UploadMemory memories={memories} onNewMemory={handleNewMemory} />
         </View>
     );
 }
