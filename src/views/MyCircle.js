@@ -8,24 +8,24 @@ const MyCircle = () => {
   const [memories, setMemories] = useState([
     {
       id: 1,
-      content: 'Lorenzo Villalobos',
+      content: 'Abraham Saldivar',
       start: 'Sibling',
       image: 'https://scontent-lax3-1.xx.fbcdn.net/v/t39.30808-6/305994857_5359421350778281_3714522131564077140_n.jpg?stp=cp0_dst-jpg_e15_p320x320_q65&_nc_cat=110&ccb=1-7&_nc_sid=3fb9c2&_nc_ohc=TkRAaQKoVM4AX8jBzCw&_nc_ht=scontent-lax3-1.xx&oh=00_AfBLl4Qnb99v1hal5zA-urhtULjq50TdVFiJ-HGZjbSrsw&oe=650344C1',
     },
     {
       id: 2,
-      content: 'Abraham Saldivar',
+      content: 'Lorenzo Villalobos',
       start: 'Sibling',
-      image: 'https://ibb.co/2gnhjGh',
+      image: 'https://www.olimpiadadeinformatica.org.mx/Resultados/img/user/5410.jpeg',
     },
-
     {
       id: 3,
-      content: 'Kevin Payan',
+      content: 'Adolfo Ramirez',
       start: 'Sibling',
-      image: 'https://scontent-lax3-1.xx.fbcdn.net/v/t39.30808-6/305994857_5359421350778281_3714522131564077140_n.jpg?stp=cp0_dst-jpg_e15_p320x320_q65&_nc_cat=110&ccb=1-7&_nc_sid=3fb9c2&_nc_ohc=TkRAaQKoVM4AX8jBzCw&_nc_ht=scontent-lax3-1.xx&oh=00_AfBLl4Qnb99v1hal5zA-urhtULjq50TdVFiJ-HGZjbSrsw&oe=650344C1',
+      image: 'https://media.licdn.com/dms/image/C5603AQEm8NPCmb9GZA/profile-displayphoto-shrink_800_800/0/1621297401371?e=1700092800&v=beta&t=90qYnDv4oMkUbVx4sY1UXNb3EeP-dNfaH6wa-Tud2Uw',
     },
 
+  
   ]);
   const [selectedImage, setSelectedImage] = useState(null); // Estado para la imagen seleccionada
   const [modalVisible, setModalVisible] = useState(false); // Estado para controlar la visibilidad del modal
