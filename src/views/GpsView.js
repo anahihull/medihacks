@@ -3,7 +3,7 @@ import { Text, View, StyleSheet} from 'react-native';
 import MapView, { Marker } from 'react-native-maps';
 import {useState, useEffect} from 'react';
 import * as Location from 'expo-location';
-import { Button, PaperProvider, DefaultTheme, ActivityIndicator } from 'react-native-paper';
+import { Portal, Dialog, Paragraph, Button, PaperProvider, DefaultTheme, ActivityIndicator } from 'react-native-paper';
 
 const theme = {
   ...DefaultTheme,
@@ -14,9 +14,37 @@ const theme = {
   },
 };
 
+const MyDialog = ({ visible, message, hideDialog }) => {
+  return (
+    <Portal>
+      <Dialog visible={visible} onDismiss={hideDialog}>
+        <Dialog.Title>Alert</Dialog.Title>
+        <Dialog.Content>
+          <Paragraph>{message}</Paragraph>
+        </Dialog.Content>
+        <Dialog.Actions>
+          <Button onPress={hideDialog}>Close</Button>
+        </Dialog.Actions>
+      </Dialog>
+    </Portal>
+  );
+};
+
 const GpsView = () => {
   const [location, setLocation] = useState(null);
   const [errorMsg, setErrorMsg] = useState(null);
+  const [dialogVisible, setDialogVisible] = useState(false);
+  const [message, setMessage] = useState('');
+
+  const showDialog = (message) => {
+    setMessage(message);
+    setDialogVisible(true);
+  };
+
+  const hideDialog = () => {
+    setDialogVisible(false);
+  };
+
   useEffect(() => {
     (async () => {
 
@@ -46,30 +74,36 @@ const GpsView = () => {
   }
   console.log(coordx);
 
-  if(coordx!== null && coordy !== null && coordx!=="undefined" ){
-    console.log("renderiando");
+  if (coordx !== null && coordy !== null && coordx !== "undefined") {
+    console.log("renderizando");
     return (
-      <PaperProvider theme={theme}>
-        <View style={styles.container}>
-          <MapView
-            style={styles.map}
-            initialRegion={{
-              latitude: coordx,
-              longitude: coordy,
-              latitudeDelta: 0.0922,
-              longitudeDelta: 0.0421,
-            }}
-            followsUserLocation={true}
+      <PaperProvider theme={theme} style={styles.container}>
+        <MapView
+          style={styles.map}
+          initialRegion={{
+            latitude: coordx,
+            longitude: coordy,
+            latitudeDelta: 0.0922,
+            longitudeDelta: 0.0421,
+          }}
+          followsUserLocation={true}
+        >
+          <Marker
+            coordinate={{ latitude: coordx, longitude: coordy }}
+            title="Mi Marcador"
+            description="Este es mi marcador"
+          />
+        </MapView>
+        <View style={styles.buttonContainer}>
+          <Button
+            mode="contained"
+            icon="alert"
+            onPress={() => showDialog('Sending location to primary contacts.')}
+            style={styles.helpButton}
           >
-            <Marker
-              coordinate={{ latitude: coordx, longitude: coordy }}
-              title="Mi Marcador"
-              description="Este es mi marcador"
-            />
-          </MapView>
-          <Button mode="contained" icon="alert" onPress={() => console.log('Pressed')}>
             I NEED HELP
           </Button>
+          <MyDialog visible={dialogVisible} message={message} hideDialog={hideDialog} />
         </View>
       </PaperProvider>
     );
@@ -99,6 +133,14 @@ const styles = StyleSheet.create({
     marginTop: 10,
     fontSize: 16,
     color: theme.colors.primary,
+  },
+  buttonContainer: {
+    position: 'absolute',
+    bottom: 16, // Ajusta esto para la posición vertical deseada
+    alignSelf: 'center', // Centra horizontalmente el botón
+  },
+  helpButton: {
+    width: 150,
   },
 });
 
