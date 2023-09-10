@@ -61,7 +61,7 @@ const MemoriesTimeline = ({ memories }) => {
             />
 
             <View style={{ flexDirection: 'row', justifyContent: 'center', marginTop: 10 }}>
-                <Title style={{ fontSize: 20, color: '#444', letterSpacing: 1, textTransform: 'capitalize' }}>
+                <Title style={{ fontSize: 20, color: '#000000', letterSpacing: 1, textTransform: 'capitalize' }}>
                     {memories[activeIndex].content}
                 </Title>
             </View>
