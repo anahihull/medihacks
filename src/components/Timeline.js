@@ -1,9 +1,12 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { View, Text, FlatList, Dimensions, Image } from 'react-native';
+import { View, FlatList, Dimensions, Text, Modal, TouchableOpacity } from 'react-native';
+import { Card , Title} from 'react-native-paper';
 
 const MemoriesTimeline = ({ memories }) => {
     const flatListRef = useRef(null);
     const [activeIndex, setActiveIndex] = useState(0);
+    const [modalVisible, setModalVisible] = useState(false);
+    const [selectedMemory, setSelectedMemory] = useState(null);
     const viewabilityConfig = useRef({ viewAreaCoveragePercentThreshold: 50 });
     const sliderWidth = Dimensions.get('window').width;
 
@@ -26,22 +29,27 @@ const MemoriesTimeline = ({ memories }) => {
                     animated: true,
                 });
             }
-        }, 3000); // Cambia cada 3 segundos
+        }, 3000);
 
-        return () => clearInterval(interval); // Limpia el intervalo cuando el componente se desmonte
+        return () => clearInterval(interval);
     }, [activeIndex]);
+
+    const handlePhotoPress = (memory) => {
+        setSelectedMemory(memory);
+        setModalVisible(true);
+    };
 
     return (
         <View style={{ marginBottom: 20 }}>
-            {/* Image Slider */}
             <FlatList
                 ref={flatListRef}
                 data={memories}
                 renderItem={({ item }) => (
-                    <Image
-                        source={{ uri: item.image }}
-                        style={{ width: sliderWidth, height: 300 }}
-                    />
+                    <TouchableOpacity onPress={() => handlePhotoPress(item)}>
+                        <Card style={{ width: sliderWidth }}>
+                            <Card.Cover source={{ uri: item.image }} style={{ height: 300 }} />
+                        </Card>
+                    </TouchableOpacity>
                 )}
                 pagingEnabled
                 horizontal
@@ -52,23 +60,32 @@ const MemoriesTimeline = ({ memories }) => {
                 viewabilityConfig={viewabilityConfig.current}
             />
 
-            {/* Memory Dots and Content */}
             <View style={{ flexDirection: 'row', justifyContent: 'center', marginTop: 10 }}>
-                {memories.map((memory, index) => (
-                    <View key={index} style={{ flexDirection: 'row', marginHorizontal: 5 }}>
-                        <View
-                            style={{
-                                width: 10,
-                                height: 10,
-                                borderRadius: 5,
-                                backgroundColor: activeIndex === index ? 'blue' : 'gray',
-                                marginRight: 10
-                            }}
-                        ></View>
-                        <Text>{memory.content}</Text>
-                    </View>
-                ))}
+                <Title style={{ fontSize: 20, color: '#000000', letterSpacing: 1, textTransform: 'capitalize' }}>
+                    {memories[activeIndex].content}
+                </Title>
             </View>
+            
+            {/* Modal for displaying photo details */}
+            {selectedMemory && (
+                <Modal
+                    animationType="slide"
+                    transparent={false}
+                    visible={modalVisible}
+                    onRequestClose={() => {
+                        setModalVisible(!modalVisible);
+                    }}
+                >
+                    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                        <Card.Cover source={{ uri: selectedMemory.image }} style={{ width: '90%', height: '50%' }} />
+                        <Text style={{ marginTop: 20, fontSize: 18 }}>{selectedMemory.content}</Text>
+                        <Text style={{ marginTop: 10, fontSize: 16 }}>{selectedMemory.start}</Text>
+                        <TouchableOpacity style={{ marginTop: 20 }} onPress={() => setModalVisible(false)}>
+                            <Text style={{ color: 'blue' }}>Close</Text>
+                        </TouchableOpacity>
+                    </View>
+                </Modal>
+            )}
         </View>
     );
 }
