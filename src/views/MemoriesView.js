@@ -1,6 +1,6 @@
-
 import React, { useState } from 'react';
-import { View, Text } from 'react-native';
+import { View } from 'react-native';
+import { Appbar } from 'react-native-paper';
 import Timeline from '../components/Timeline';
 import UploadMemory from '../components/UploadMemory';
 
@@ -23,11 +23,15 @@ const MemoriesView = () => {
     }
 
     return (
+        <View style={{ flex: 1 , backgroundColor: '#f0daf7'}}>
+        <Appbar.Header>
+        <Appbar.Content titleStyle={{ fontSize: 24, fontWeight: 'bold' }} title="Slideshow View" />
+        </Appbar.Header>
         <View style={{ padding: 20 }}>
-            <Text>Slideshow View</Text>
             <Timeline memories={memories} />
             <UploadMemory memories={memories} onNewMemory={handleNewMemory} />
         </View>
+    </View>
     );
 }
 

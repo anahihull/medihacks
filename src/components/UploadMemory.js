@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
-import { Button, Alert } from 'react-native';
+import { Alert } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
+import {Button, PaperProvider} from 'react-native-paper';
 
 const UploadMemory = ({ memories, onNewMemory }) => {
 
+  
     const isContentNameUnique = (name) => {
         return !memories.some(memory => memory.content === name);
     }
@@ -69,9 +71,13 @@ const UploadMemory = ({ memories, onNewMemory }) => {
         } else {
             Alert.alert('Error', 'Memory upload cancelled.');
         }
-    };
+    }
 
-    return <Button title="Upload Memory" onPress={handleImagePick} />;
+    return (
+            <Button icon="camera" mode="contained" onPress={handleImagePick}>
+            Upload picture
+            </Button>
+    )
 }
 
 export default UploadMemory;
