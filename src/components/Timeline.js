@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { View, FlatList, Dimensions, Text, Modal, TouchableOpacity } from 'react-native';
+import { View, FlatList, Dimensions, Text, Modal, TouchableOpacity, StyleSheet } from 'react-native';
 import { Card , Title} from 'react-native-paper';
 
 const MemoriesTimeline = ({ memories }) => {
@@ -42,11 +42,12 @@ const MemoriesTimeline = ({ memories }) => {
     return (
         <View style={{ marginBottom: 20 }}>
             <FlatList
+                style={styles.container}
                 ref={flatListRef}
                 data={memories}
                 renderItem={({ item }) => (
                     <TouchableOpacity onPress={() => handlePhotoPress(item)}>
-                        <Card style={{ width: sliderWidth }}>
+                        <Card style={{ width: sliderWidth}}>
                             <Card.Cover source={{ uri: item.image }} style={{ height: 300 }} />
                         </Card>
                     </TouchableOpacity>
@@ -91,3 +92,9 @@ const MemoriesTimeline = ({ memories }) => {
 }
 
 export default MemoriesTimeline;
+
+const styles = StyleSheet.create({
+    container:{
+        borderRadius: 20
+    }
+})
