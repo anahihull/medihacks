@@ -141,6 +141,7 @@ const styles = StyleSheet.create({
   },
   helpButton: {
     width: 150,
+    backgroundColor: "#590D8C"
   },
 });
 

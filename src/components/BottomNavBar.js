@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, TouchableOpacity, Text } from 'react-native';
+import Icon from 'react-native-vector-icons/Ionicons';
 
 const BottomNavBar = ({ navigation }) => {
   const navigateToScreen = (screenName) => {
@@ -12,25 +13,25 @@ const BottomNavBar = ({ navigation }) => {
         style={styles.tab}
         onPress={() => navigateToScreen('Home')}
       >
-        <Text>Home</Text>
+       <Icon name="home" size={30} color="white" /> 
       </TouchableOpacity>
       <TouchableOpacity
         style={styles.tab}
         onPress={() => navigateToScreen('Memories')}
       >
-        <Text>Memories</Text>
+      <Icon name="camera" size={30} color="white" /> 
       </TouchableOpacity>
       <TouchableOpacity
         style={styles.tab}
         onPress={() => navigateToScreen('GpsView')}
       >
-        <Text>GPS</Text>
+      <Icon name="map" size={30} color="white" /> 
       </TouchableOpacity>
       <TouchableOpacity
         style={styles.tab}
         onPress={() => navigateToScreen('MyCircle')}
       >
-        <Text>My Circle</Text>
+      <Icon name="people" size={30} color="white" /> 
       </TouchableOpacity>
     </View>
   );
@@ -41,8 +42,8 @@ const styles = {
     flexDirection: 'row',
     justifyContent: 'space-around',
     alignItems: 'center',
-    backgroundColor: 'lightgray', // Color de fondo de la barra de navegación
-    height: 60, // Altura de la barra de navegación
+    backgroundColor: '#590D8C',
+    height: 60, 
   },
   tab: {
     flex: 1,

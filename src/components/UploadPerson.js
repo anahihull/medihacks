@@ -66,11 +66,11 @@ const UploadMemory = ({ memories, onNewMemory }) => {
       icon="camera"
       onPress={handleImagePick}
       style={{
-        backgroundColor: '#660955', // Cambia el color de fondo del botón
-        paddingVertical: 10, // Ajusta el espacio vertical
-        paddingHorizontal: 20, // Ajusta el espacio horizontal
+        backgroundColor: '#590D8C' , 
+        paddingVertical: 10, 
+        paddingHorizontal: 20, 
       }}
-      labelStyle={{ fontSize: 16 }} // Cambia el tamaño de la fuente del botón
+      labelStyle={{ fontSize: 16 }} 
     >
       Upload Person
     </Button>

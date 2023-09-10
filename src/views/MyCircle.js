@@ -8,19 +8,19 @@ const MyCircle = () => {
   const [memories, setMemories] = useState([
     {
       id: 1,
-      content: 'Abraham Saldivar',
+      content: 'Mila and Mia',
       start: 'Sibling',
-      image: 'https://scontent-lax3-1.xx.fbcdn.net/v/t39.30808-6/305994857_5359421350778281_3714522131564077140_n.jpg?stp=cp0_dst-jpg_e15_p320x320_q65&_nc_cat=110&ccb=1-7&_nc_sid=3fb9c2&_nc_ohc=TkRAaQKoVM4AX8jBzCw&_nc_ht=scontent-lax3-1.xx&oh=00_AfBLl4Qnb99v1hal5zA-urhtULjq50TdVFiJ-HGZjbSrsw&oe=650344C1',
+      image: 'https://i.pinimg.com/564x/85/07/92/850792e9b3e1f6d68c9b0d732e6116ed.jpg',
     },
     {
       id: 2,
-      content: 'Lorenzo Villalobos',
+      content: 'Lorenzo Grandson',
       start: 'Sibling',
       image: 'https://www.olimpiadadeinformatica.org.mx/Resultados/img/user/5410.jpeg',
     },
     {
       id: 3,
-      content: 'Adolfo Ramirez',
+      content: 'Adolfo Grandson',
       start: 'Sibling',
       image: 'https://media.licdn.com/dms/image/C5603AQEm8NPCmb9GZA/profile-displayphoto-shrink_800_800/0/1621297401371?e=1700092800&v=beta&t=90qYnDv4oMkUbVx4sY1UXNb3EeP-dNfaH6wa-Tud2Uw',
     },
@@ -93,7 +93,10 @@ const MyCircle = () => {
 
 const styles = StyleSheet.create({
   container: {
+    justifyContent: 'center',
     padding: 35,
+    backgroundColor: '#D8BAD9',
+    height: 700
   },
   memoryContainer: {
     flexDirection: 'row',

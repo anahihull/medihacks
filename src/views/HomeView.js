@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { View, StyleSheet, TouchableWithoutFeedback, Keyboard, FlatList, Alert, Text } from 'react-native';
-import { TextInput, Button, Card, Paragraph, List } from 'react-native-paper';
+import { TextInput, Button, Card, Paragraph, List, PaperProvider } from 'react-native-paper';
 import * as Animatable from 'react-native-animatable';
 
 const HomeView = () => {
@@ -60,6 +60,7 @@ const HomeView = () => {
   };
 
   return (
+    <PaperProvider>
     <TouchableWithoutFeedback onPress={handleDismissKeyboard}>
       <Animatable.View animation="fadeIn" duration={1000} style={styles.container}>
         <Card style={styles.card}>
@@ -69,7 +70,7 @@ const HomeView = () => {
           <Card.Content>
             {
               hasSubmitted ? 
-              <Paragraph>{description}</Paragraph> :
+              <Paragraph>Who am I? Memories might play hide and seek with me, but my heart always remembers love. Even in the fog, your kindness shines like a beacon. Every hug, every smile, feels like a sunbeam on a cloudy day.</Paragraph> :
               <TextInput
                 label="Describe who you are"
                 value={description}
@@ -93,6 +94,7 @@ const HomeView = () => {
         </Button>
 
         {showDiary && (
+          <PaperProvider>
           <View style={styles.diaryContainer}>
             <TextInput
               label="Content"
@@ -102,7 +104,7 @@ const HomeView = () => {
               numberOfLines={5}
               style={styles.input}
             />
-            <Button mode="text" onPress={promptForTitleAndAddEntry}>
+            <Button mode="contained" style={styles.buttonadd} onPress={promptForTitleAndAddEntry}>
               Add
             </Button>
             <FlatList
@@ -120,9 +122,11 @@ const HomeView = () => {
               keyExtractor={(item, index) => index.toString()}
             />
           </View>
+          </PaperProvider>
         )}
       </Animatable.View>
     </TouchableWithoutFeedback>
+    </PaperProvider>
   );
 };
 
@@ -131,13 +135,16 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 20,
     justifyContent: 'center',
+    backgroundColor: '#D8BAD9',
   },
   card: {
-    marginBottom: 20,
+    margin: 10,
+    backgroundColor: 'white'
   },
   cardHeader: {
-    backgroundColor: '#674FA3',
+    backgroundColor: "#590D8C",
     borderRadius: 10,
+    margin: 10,
     padding: 10,
     alignItems: 'center',
     justifyContent: 'center'
@@ -148,11 +155,14 @@ const styles = StyleSheet.create({
     color: 'white',
   },
   input: {
-    backgroundColor: 'white',
+    backgroundColor: 'transparent',
     marginBottom: 10,
   },
   button: {
+    width: 200,
     marginTop: 20,
+    alignSelf: 'center',
+    backgroundColor: "#590D8C"
   },
   diaryContainer: {
     marginTop: 20,
@@ -160,30 +170,31 @@ const styles = StyleSheet.create({
   diaryEntry: {
     marginBottom: 15,
     borderRadius: 10,
-    backgroundColor: '#f6f6f6',
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
+    backgroundColor: '#F2DCEB',
     elevation: 5,
   },
   entryTitle: {
-    fontSize: 18,
+    fontSize: 10,
     fontWeight: 'bold',
     color: '#333',
     padding: 10,
     borderBottomWidth: 0.5,
     borderBottomColor: '#ddd',
-    backgroundColor: '#fff',
+    backgroundColor: 'transparent',
+    borderRadius: 100
   },
   entryContent: {
     fontSize: 15,
     color: '#666',
     padding: 10,
   },
+  buttonadd:{
+    backgroundColor: "#590D8C",
+    width: 100,
+    alignSelf: 'center',
+    marginBottom: 10,
+    color: 'white'
+  }
 });
 
 export default HomeView;

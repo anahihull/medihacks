@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Alert } from 'react-native';
+import { Alert, StyleSheet, View} from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 import {Button, PaperProvider} from 'react-native-paper';
 
@@ -74,9 +74,12 @@ const UploadMemory = ({ memories, onNewMemory }) => {
     }
 
     return (
-            <Button icon="camera" mode="contained" onPress={handleImagePick}>
+
+        <Button icon="camera" mode="contained" onPress={handleImagePick} style={{backgroundColor: '#590D8C' }}>
             Upload picture
-            </Button>
+        </Button>
+
+            
     )
 }
 

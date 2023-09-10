@@ -3,12 +3,17 @@ import { View, Text, StyleSheet } from 'react-native';
 import { TextInput, Button } from 'react-native-paper';
 import * as Animatable from 'react-native-animatable';
 import { useNavigation } from '@react-navigation/native';
+import { Image } from 'react-native';
+
 
 const LogIn = () => {
+
+  
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [errorMsg, setErrorMsg] = useState('');
   const [isSuccess, setIsSuccess] = useState(false); // Nuevo estado para indicar éxito
+
   const navigation = useNavigation(); 
 
   const handleLogin = () => {
@@ -16,7 +21,7 @@ const LogIn = () => {
       setErrorMsg('Successful Log In!');
       setIsSuccess(true); // Marca como éxito
       // Navega a la siguiente pantalla o realiza cualquier otra acción
-      navigation.navigate('MyCircle')
+      navigation.navigate('Main')
     } else {
       setErrorMsg('Invalid Credentials');
     }
@@ -24,6 +29,7 @@ const LogIn = () => {
 
   return (
     <View style={styles.container}>
+      <Image source={require('../../assets/logo.png')} style={styles.logo}/>
       <Text style={styles.title}>Log In</Text>
       <TextInput
         label="Username"
@@ -60,16 +66,18 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     padding: 20,
-    backgroundColor: 'white',
+    backgroundColor: '#D8BAD9',
   },
   title: {
     fontSize: 24,
     marginBottom: 20,
+    color: '#FFFFFF',
     textAlign: 'center',
   },
   input: {
     marginBottom: 10,
     backgroundColor: 'transparent',
+    color: 'white'
   },
   error: {
     color: 'red',
@@ -78,13 +86,19 @@ const styles = StyleSheet.create({
   },
   button: {
     marginTop: 10,
-    backgroundColor: '#000000',
+    backgroundColor: "#590D8C",
   },
   successText: {
     color: 'green',
     marginTop: 10,
     textAlign: 'center',
   },
+  logo: {
+    width: 150,
+    height: 150,
+    alignSelf: 'center', 
+    marginBottom: 20
+  }
 });
 
 export default LogIn;
