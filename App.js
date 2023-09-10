@@ -11,6 +11,7 @@ import BottomNavBar from './src/components/BottomNavBar'; // Importa el componen
 
 const Tab = createBottomTabNavigator();
 
+
 const App = () => {
   return (
     <NavigationContainer>
