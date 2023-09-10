@@ -3,7 +3,16 @@ import { Text, View, StyleSheet} from 'react-native';
 import MapView, { Marker } from 'react-native-maps';
 import {useState, useEffect} from 'react';
 import * as Location from 'expo-location';
-import {Button, PaperProvider} from 'react-native-paper';
+import { Button, PaperProvider, DefaultTheme, ActivityIndicator } from 'react-native-paper';
+
+const theme = {
+  ...DefaultTheme,
+  colors: {
+    ...DefaultTheme.colors,
+    primary: '#663399',
+    accent: '#f39c12',
+  },
+};
 
 const GpsView = () => {
   const [location, setLocation] = useState(null);
@@ -40,7 +49,7 @@ const GpsView = () => {
   if(coordx!== null && coordy !== null && coordx!=="undefined" ){
     console.log("renderiando");
     return (
-      <PaperProvider>
+      <PaperProvider theme={theme}>
         <View style={styles.container}>
           <MapView
             style={styles.map}
@@ -58,21 +67,20 @@ const GpsView = () => {
               description="Este es mi marcador"
             />
           </MapView>
-          <Button icon="camera" mode="contained" onPress={() => console.log('Pressed')}>
-          Press me
+          <Button mode="contained" icon="alert" onPress={() => console.log('Pressed')}>
+            I NEED HELP
           </Button>
         </View>
       </PaperProvider>
     );
-  }else{
-    console.log("eesperando");
+  } else {
     return (
-      <View style={styles.container}>
-        <Text>Loading</Text>
+      <View style={styles.loadingContainer}>
+        <ActivityIndicator animating={true} color={theme.colors.primary} />
+        <Text style={styles.loadingText}>Loading...</Text>
       </View>
     );
   }
-
 };
 
 const styles = StyleSheet.create({
@@ -82,5 +90,16 @@ const styles = StyleSheet.create({
   map: {
     flex: 1,
   },
+  loadingContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  loadingText: {
+    marginTop: 10,
+    fontSize: 16,
+    color: theme.colors.primary,
+  },
 });
+
 export default GpsView;
